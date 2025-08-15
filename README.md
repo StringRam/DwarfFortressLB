@@ -3,63 +3,63 @@
 ![⭐ Stars](https://img.shields.io/github/stars/StringRam/Willow-arch?label=⭐%20Stars)
 
 
-# 🌿 Willow-Dotfiles
+# 🌿 DwarfFortressLB-Dotfiles
 
-Personal dotfiles for my Quickshell-Hyprland setup, a streamlined Linux workflow, themed around willow trees.
-
+Dedico este repositorio y sus contenidos a mi amigo. Tienen una temática basada en el juego Dwarf Fortress.
 
 ## Desktop Workflow Demo
 
 <!-- Replace the link below with your actual video or GIF when ready -->
-[![Watch the workflow video](https://img.shields.io/badge/Watch-Workflow%20Video-blue?logo=youtube)](link.here)
+[![Workflow video](https://img.shields.io/badge/Watch-Workflow%20Video-blue?logo=youtube)](link.here)
 
 
 
-## Features
+## Funcionalidades
 
-- Hyprland configuration with custom Quickshell theming
-- Custom scripts for automation and workflow
-- Rofi, Kitty, and Wlogout configs
-- Fastfetch and pywal integration
-- Easy wallpaper switching and color sync
+- Configurado en Hyprland
+- Custom scripts para automatizar procesos.
+- Configuraciones para Waybar, Rofi, Kitty, Fastfetch y Wlogout
+- Selección de wallpapers con extracción de color integrada.
 
 
-## Installation
+## Installación
 
 ```sh
-git clone https://github.com/StringRam/Willow-Dotfiles.git ~/Willow-Dotfiles
-cd ~/Willow-Dotfiles
-chmod +x install.sh
-./install.sh
+git clone https://github.com/StringRam/DwarfFortressLB.git
+cd ~/DwarfFortressLB
+chmod +x dotfiles-install.sh
+./dotfiles-install.sh
 ```
-> This script is meant to be run after the [Willow-Arch](https://github.com/StringRam/Willow-arch) script.
+> Ejecutar este script posterior a la instalación de [Willow-Arch](https://github.com/StringRam/Willow-arch).
 
 
-## 🗂️ Directory Structure
+## 🗂️ Estructura de los directorios
 
 <details>
-<summary>Click to expand</summary>
+<summary>Click para expandir</summary>
 
 ```
 Dotfiles/
-├── hypr/           # Hyprland configs and scripts
-├── kitty/          # Kitty terminal themes and sessions
-├── rofi/           # Rofi launcher themes
-├── wal/            # Pywal templates for color syncing
-└── fastfetch/      # Fastfetch config for system info
+├── hypr/           # Hyprland configs y scripts
+├── kitty/          # Kitty terminal
+├── waybar/         # Barra de estatus
+├── swaync/         # Panel lateral y notificaciones
+├── rofi/           # Configuraciones de rofi
+├── wal/            # Pywal templates
+└── fastfetch/      # Configuracion de fastfetch
 ```
 </details>
 
 
-## Contributions
+## Contribuciones
 
-Contributions, suggestions, and constructive feedback are welcome.  
-Feel free to open an issue or pull request.
+Contribuciones, sugerencias y criticismo constructivo son bienvenidos.
+Si encuentras algún problema, abre un issue en este repositorio.
 
 
-## 📜 License
+## 📜 Licencia
 
 MIT License  
 © 2025 Mateo Correa Franco
 
-> Credits to the crators of: [hyprwm](https://github.com/hyprwm) and [quickshell](https://github.com/quickshell-mirror/quickshell).
+> Créditos a los creadores de: [hyprwm](https://github.com/hyprwm) y Dwarf Fortress en steam!
