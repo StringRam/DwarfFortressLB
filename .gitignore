@@ -1,0 +1,20 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore editor settings
+.vscode/
+.idea/
+
+# Ignore cache and log files
+*.log
+*.swp
+*.swo
+
+# Ignore compiled files
+*.pyc
+*.o
+*.out
+
+# Ignore user-specific config
+*.local

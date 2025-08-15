@@ -1,0 +1,15 @@
+configuration{
+    modi: "drun";
+    icon-theme: "Oranchelo";
+    show-icons: true;
+    terminal: "kitty";
+    drun-display-format: "{name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    sidebar-mode: true;
+    window-format: "{w}{t}";
+}
+
+@theme "style"
+

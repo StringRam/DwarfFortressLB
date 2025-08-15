@@ -1,0 +1,91 @@
+{
+    "layer": "top",
+        "position": "top",
+        "height": 60,
+        "reload_style_on_change": true,
+        "modules-center": ["user", "custom/pacman", "hyprland/workspaces", "custom/notification", "cpu", "memory", "temperature","battery","tray","custom/weather", "clock"],
+
+        "user": {
+            "format": "{user}\nStalwart\nFort",
+            "interval": 60
+        },
+        "custom/pacman": {
+            "format": "󰅢 ",
+            "on-click": "kitty sh -c 'yay -Syu --noconfirm; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar",
+            "signal": 8,
+            "tooltip": false
+        },
+        "hyprland/workspaces": {
+            "format": "{icon}",
+            "format-icons": {
+                "active": "",
+                "default": "",
+                "empty": ""
+            },
+            "persistent-workspaces": {
+                "*": [ 1,2,3,4,5,6,7 ]
+            }
+        },
+        "custom/notification": {
+            "tooltip": false,
+            "format": "",
+            "on-click": "swaync-client -t -sw",
+            "escape": true
+        },
+        "cpu": {
+            "format": "Cpu\n{usage}%",
+            "tooltip": false
+        },
+        "memory": {
+            "format": "Ram\n{}%"
+        },
+        "temperature": {
+            "critical-threshold": 80,
+            "format": "Temp\n{temperatureC}°C"
+        },
+        "battery": {
+            "interval":1,
+            "states": {
+                "good": 95,
+                "warning": 30,
+                "critical": 20
+            },
+            "format": "{capacity}% {icon}",
+            "format-charging": "{capacity}% 󰂄",
+            "format-plugged": "{capacity}% 󰂄 ",
+            "format-alt": "{time} {icon}",
+            "format-icons": [
+                "󰁻",
+            "󰁼",
+            "󰁾",
+            "󰂀",
+            "󰂂",
+            "󰁹"
+            ],
+        },
+        "tray": {
+            "icon-size": 14,
+            "spacing": 10
+        },
+        "custom/weather": {
+        "format": "{}",
+        "tooltip": true,
+        "interval": 1800,
+        "exec": "$HOME/.config/waybar/scripts/wttr.py",
+        "return-type": "json"
+        },
+        "clock": {
+            "format": "{:%d %B, %A\n%I:%M %p\nYear %Y} ",
+            "interval": 1,   
+            "tooltip-format": "<tt>{calendar}</tt>",
+            "calendar": {
+                "format": {
+                    "today": "<span color='#fAfBfC'><b>{}</b></span>"
+                }
+            },
+            "actions": {
+                "on-click-right": "shift_down",
+                "on-click": "shift_up"
+            }
+        }
+} 
