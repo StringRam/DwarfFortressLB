@@ -3,7 +3,7 @@
 ![⭐ Stars](https://img.shields.io/github/stars/StringRam/Willow-arch?label=⭐%20Stars)
 
 
-# 🌿 DwarfFortressLB-Dotfiles
+# ⛏️ DwarfFortressLB-Dotfiles
 
 Dedico este repositorio y sus contenidos a mi amigo. Tienen una temática basada en el juego Dwarf Fortress.
 
