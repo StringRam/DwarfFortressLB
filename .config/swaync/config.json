@@ -59,31 +59,9 @@
         "buttons-grid": {
             "actions": [
                 {
-                    "label": "󰝟",
-                    "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-                    "type": "toggle"
-                },
-                {
                     "label": "󰍭",
                     "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
                     "type": "toggle"
-                },
-
-                {
-                    "label":"󰤄",
-                    "command": "swaync-client -d",
-                    "type":"toggle"
-                },
-
-                {
-                    "label": "",
-                    "command": "kitty bash -i -c 'Settings'"
-                    
-                },
-                {
-                    "label": "",
-                    "command": "kitty bash -i -c 'tasks'"
-
                 },
                 {
                     "label": "",

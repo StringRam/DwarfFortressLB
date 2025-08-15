@@ -21,22 +21,22 @@ button {
 }
 
 #lock {
-    background-image: image(url("/home/LucasTMKS/.config/wlogout/lock.png"))
+    background-image: image(url("/home/carnofriki/.config/wlogout/lock.png"))
 }
 #hibernate {
-    background-image: image(url("/home/LucasTMKS/.config/wlogout/sleep.png"))
+    background-image: image(url("/home/carnofriki/.config/wlogout/sleep.png"))
 }
 #logout {
-    background-image: image(url("/home/LucasTMKS/.config/wlogout/logout.png"))
+    background-image: image(url("/home/carnofriki/.config/wlogout/logout.png"))
 }
 #shutdown {
-    background-image: image(url("/home/LucasTMKS/.config/wlogout/power.png"))
+    background-image: image(url("/home/carnofriki/.config/wlogout/power.png"))
 }
 #suspend {
-    background-image: image(url("/home/LucasTMKS/.config/wlogout/pause.png"))
+    background-image: image(url("/home/carnofriki/.config/wlogout/pause.png"))
 }
 #reboot {
-    background-image: image(url("/home/LucasTMKS/.config/wlogout/restart.png"))
+    background-image: image(url("/home/carnofriki/.config/wlogout/restart.png"))
 }
 
 button:focus,
