@@ -22,7 +22,7 @@ Dedico este repositorio y sus contenidos a mi amigo. Tienen una temática basada
 - Selección de wallpapers con extracción de color integrada.
 
 
-## Installación
+## Instalación
 
 ```sh
 git clone https://github.com/StringRam/DwarfFortressLB.git
