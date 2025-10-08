@@ -35,6 +35,7 @@ kitty
 imagemagick
 zoxide
 fzf
+stow
 fastfetch
 firefox
 
