@@ -1,0 +1,49 @@
+#┌──────────────────────────────  ──────────────────────────────┐
+#                            Hyprland
+#└──────────────────────────────  ──────────────────────────────┘
+hyprland
+hyprlock
+hypridle
+hyprsunset
+hyprpolkitagent
+
+
+#┌──────────────────────────────  ──────────────────────────────┐
+#                            Essentials
+#└──────────────────────────────  ──────────────────────────────┘
+swww
+swaync
+pipewire
+pipewire-pulse
+pavucontrol
+wireplumber
+xdg-desktop-portal-hyprland
+qt5-wayland
+qt6-wayland
+noto-fonts
+cliphist
+uwsm
+
+
+#┌──────────────────────────────  ──────────────────────────────┐
+#                            Core apps
+#└──────────────────────────────  ──────────────────────────────┘
+waybar
+rofi-wayland
+nautilus
+kitty
+imagemagick
+zoxide
+fzf
+fastfetch
+firefox
+
+
+#┌──────────────────────────────  ──────────────────────────────┐
+#                              Extra
+#└──────────────────────────────  ──────────────────────────────┘
+nwg-look
+gnome-disk-utility
+gnome-calculator
+gnome-keyring
+eog
