@@ -116,8 +116,16 @@ configure_regreet() {
 vt = 1
 
 [default_session]
-command = "regreet"
-user = "_greetd"
+command = "Hyprland --config /etc/greetd/hyprland.conf"
+user = "greeter"
+EOF
+    sudo tee /etc/greetd/hyprland.conf >/dev/null <<'EOF'
+exec-once = regreet; hyprctl dispatch exit
+misc {
+    disable_hyprland_logo = true
+    disable_splash_rendering = true
+    disable_hyprland_qtutils_check = true
+}
 EOF
     sudo systemctl enable greetd.service
 }
