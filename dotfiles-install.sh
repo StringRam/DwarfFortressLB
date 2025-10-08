@@ -13,7 +13,7 @@ YELLOW='\033[33m'
 RESET='\033[0m'
 
 info_print()  { echo -e "${BOLD}${GREEN}[ o ] $1${RESET}"; }
-input_print() { echo -ne "${BOLD}${YELLOW}[ ? ] $1${RESET}"; }
+input_print() { echo -ne "${BOLD}${YELLOW}[ o ] $1${RESET}"; }
 error_print() { echo -e "${BOLD}${RED}[ x ] $1${RESET}"; }
 
 #┌──────────────────────────────  ──────────────────────────────┐
