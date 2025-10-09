@@ -6,6 +6,7 @@ hyprlock
 hypridle
 hyprsunset
 hyprpolkitagent
+hyprshot
 
 
 #┌──────────────────────────────  ──────────────────────────────┐

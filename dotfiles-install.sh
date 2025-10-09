@@ -67,18 +67,31 @@ install_pacman_packages() {
     sudo pacman -S --noconfirm --needed "${packages[@]}"
 }
 
-install_aur_packages() {
-    local aurfile="aur.txt"
-    [[ ! -f "$aurfile" ]] && info_print "No aur.txt found, skipping AUR installation." && return
+# AUR packages: list your AUR packages here (replace the placeholders).
+# The script will skip AUR installation if this array is empty.
+AUR_PACKAGES=(
+    "wlogout"
+    "hyprpicker"
+    "python-pywal16"
+    "python-pywalfox"
+    "visual-studio-code-bin"
+    "vesktop"
+)
 
-    mapfile -t aurpkgs < <(grep -Ev '^\s*(#|$)' "$aurfile")
-    info_print "Installing ${#aurpkgs[@]} AUR packages via $AUR_HELPER..."
-    "$AUR_HELPER" -S --needed --noconfirm "${aurpkgs[@]}"
+install_aur_packages() {
+    if [[ ${#AUR_PACKAGES[@]} -eq 0 ]]; then
+        info_print "No AUR packages defined in AUR_PACKAGES, skipping AUR installation."
+        return
+    fi
+
+    info_print "Installing ${#AUR_PACKAGES[@]} AUR packages via $AUR_HELPER..."
+    # Use the selected AUR helper (paru or yay)
+    "$AUR_HELPER" -S --needed --noconfirm "${AUR_PACKAGES[@]}"
 }
 
 #┌──────────────────────────────  ──────────────────────────────┐
 #                       NVIDIA driver detection
-#└──────────────────────────────  ──────────────────────────────┐
+#└──────────────────────────────  ──────────────────────────────┘
 detect_nvidia() {
     if ! lspci | grep -qi "nvidia"; then
         info_print "No NVIDIA GPU detected."
@@ -103,7 +116,49 @@ detect_nvidia() {
 
 #┌──────────────────────────────  ──────────────────────────────┐
 #                       Post-install configuration
-#└──────────────────────────────  ──────────────────────────────┐
+#└──────────────────────────────  ──────────────────────────────┘
+
+install_fonts() {
+    info_print "Installing local TTF fonts..."
+    # Determine script directory and assets directory
+    local script_dir fonts_src fonts_dest ttf_files
+    script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    fonts_src="$script_dir/Dwarf-Fortress-Assets"
+    fonts_dest="${XDG_DATA_HOME:-$HOME/.local/share}/fonts"
+
+    mkdir -p "$fonts_dest"
+
+    # Find .ttf files inside the assets directory (recursively)
+    mapfile -t ttf_files < <(find "$fonts_src" -type f -iname '*.ttf' 2>/dev/null || true)
+
+    if [[ ${#ttf_files[@]} -eq 0 ]]; then
+        info_print "No .ttf fonts found in $fonts_src — nothing to install."
+        return
+    fi
+
+    for f in "${ttf_files[@]}"; do
+        local basename_f
+        basename_f=$(basename "$f")
+        info_print "Installing $basename_f"
+        if [[ -e "$fonts_dest/$basename_f" ]]; then
+            info_print "Skipping $basename_f (already present)"
+            continue
+        fi
+        cp "$f" "$fonts_dest/"
+        chmod 644 "$fonts_dest/$basename_f" || true
+    done
+
+    # Refresh font cache for the user
+    if command -v fc-cache &>/dev/null; then
+        info_print "Refreshing font cache..."
+        fc-cache -f "$fonts_dest" >/dev/null 2>&1 || true
+    else
+        info_print "fc-cache not found; remember to run 'fc-cache -f' manually if needed."
+    fi
+
+    info_print "Fonts installation complete."
+}
+
 configure_regreet() {
     if ! command -v regreet &>/dev/null; then
         info_print "regreet not installed, skipping configuration."
@@ -141,7 +196,7 @@ apply_stow() {
 
 #┌──────────────────────────────  ──────────────────────────────┐
 #                       Main execution flow
-#└──────────────────────────────  ──────────────────────────────┐
+#└──────────────────────────────  ──────────────────────────────┘
 main() {
     check_root
     check_internet
@@ -150,6 +205,7 @@ main() {
     install_pacman_packages
     install_aur_packages
     configure_regreet
+    install_fonts
     apply_stow
 
     info_print "Dotfiles installation complete!"
