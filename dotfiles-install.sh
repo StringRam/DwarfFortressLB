@@ -98,20 +98,33 @@ detect_nvidia() {
         return 0
     fi
 
-    info_print "NVIDIA GPU detected. Determining driver..."
-    local gpu_info
-    gpu_info=$(lspci | grep -i "nvidia")
+    info_print "NVIDIA GPU detected. Selecting driver package..."
+    local prefer_dkms prefer_open driver_pkg utils_pkg
 
-    if echo "$gpu_info" | grep -qE "RTX 40|Ada|Lovelace"; then
+    # Allow user to override preference via environment variables:
+    # NVIDIA_USE_DKMS=1 to prefer DKMS variant, NVIDIA_USE_OPEN=1 to prefer nvidia-open
+    prefer_dkms=${NVIDIA_USE_DKMS:-0}
+    prefer_open=${NVIDIA_USE_OPEN:-0}
+
+    if [[ "$prefer_open" -eq 1 ]]; then
         driver_pkg="nvidia-open-dkms"
-    elif echo "$gpu_info" | grep -qE "RTX 20|RTX 30|GTX 16|Turing|Ampere"; then
-        driver_pkg="nvidia-dkms"
     else
-        driver_pkg="nvidia-390xx-dkms"
+        if [[ "$prefer_dkms" -eq 1 ]]; then
+            driver_pkg="nvidia-dkms"
+        else
+            driver_pkg="nvidia"
+        fi
     fi
 
-    info_print "Installing driver: $driver_pkg"
-    sudo pacman -S --noconfirm --needed "$driver_pkg"
+    utils_pkg="nvidia-utils"
+
+    info_print "Installing driver: $driver_pkg and utils: $utils_pkg"
+
+    if [[ "$driver_pkg" == *-dkms ]]; then
+        info_print "DKMS driver selected. Ensure kernel headers are installed (e.g. linux-headers)."
+    fi
+
+    sudo pacman -S --noconfirm --needed "$driver_pkg" "$utils_pkg"
 }
 
 #┌──────────────────────────────  ──────────────────────────────┐
