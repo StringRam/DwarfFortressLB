@@ -70,10 +70,12 @@ install_pacman_packages() {
 # AUR packages: list your AUR packages here (replace the placeholders).
 # The script will skip AUR installation if this array is empty.
 AUR_PACKAGES=(
+    "greetd-regreet-git"
     "wlogout"
     "hyprpicker"
     "python-pywal16"
     "python-pywalfox"
+    "zsh-theme-powerlevel10k-git"
     "visual-studio-code-bin"
     "vesktop"
 )
@@ -172,6 +174,43 @@ install_fonts() {
     info_print "Fonts installation complete."
 }
 
+# Make scripts inside the user's config directory executable.
+# Criteria: files ending with .sh or files starting with a shebang (#!).
+make_config_scripts_executable() {
+    info_print "Setting execute permissions on scripts in the config directory..."
+
+    local config_dir
+    config_dir="${XDG_CONFIG_HOME:-$HOME/.config}"
+
+    if [[ ! -d "$config_dir" ]]; then
+        info_print "No config directory found at $config_dir, skipping."
+        return 0
+    fi
+
+    local changed=0
+    # Find all regular files and check if they are scripts
+    while IFS= read -r -d '' file; do
+        # skip if already executable
+        if [[ -x "$file" ]]; then
+            continue
+        fi
+
+        # If filename ends with .sh or file starts with shebang, make it executable
+        if [[ "$file" == *.sh ]] || head -n1 "$file" 2>/dev/null | grep -q '^#!'; then
+            chmod 755 "$file" 2>/dev/null && {
+                info_print "Made executable: ${file#$HOME/}"
+                changed=$((changed+1))
+            } || error_print "Failed to chmod $file"
+        fi
+    done < <(find "$config_dir" -type f -print0 2>/dev/null)
+
+    if [[ $changed -eq 0 ]]; then
+        info_print "No scripts needed permission changes in $config_dir."
+    else
+        info_print "Updated $changed script(s) in $config_dir."
+    fi
+}
+
 configure_regreet() {
     if ! command -v regreet &>/dev/null; then
         info_print "regreet not installed, skipping configuration."
@@ -198,6 +237,19 @@ EOF
     sudo systemctl enable greetd.service
 }
 
+changeshell_zsh(){
+    if ! command -v zsh &>/dev/null; then
+        info_print "zsh not installed, skipping configuration."
+        return
+    fi
+    if [[ "$SHELL" != *"zsh"* ]]; then
+        info_print "Changing default shell to zsh..."
+        chsh -s "$(command -v zsh)"
+    else
+        info_print "Default shell is already zsh."
+    fi
+}
+
 apply_stow() {
     if ! command -v stow &>/dev/null; then
         error_print "GNU Stow not installed. Please install it first."
@@ -219,7 +271,9 @@ main() {
     install_aur_packages
     configure_regreet
     install_fonts
+    changeshell_zsh
     apply_stow
+    make_config_scripts_executable
 
     info_print "Dotfiles installation complete!"
 }
