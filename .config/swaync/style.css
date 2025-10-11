@@ -24,11 +24,7 @@
 .control-center .notification-row {
     background-color: unset;
 }
-.control-center .notification-row .notification-background .notification,
-.control-center .notification-row .notification-background .notification .notification-content,
-.floating-notifications .notification-row .notification-background .notification,
-.floating-notifications.background .notification-background .notification .notification-content {
-}
+
 .notification{
     background: alpha(@mycolor,.9);
 
