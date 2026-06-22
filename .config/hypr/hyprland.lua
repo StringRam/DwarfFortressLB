@@ -49,8 +49,8 @@ hl.config({
     gaps_out = 15,
     border_size = 3,
     col = {
-      active_border = "rgb(E8CE47) 45deg",
-      inactive_border = "rgb(E8CE47)",
+      active_border = "0xE8CE47",
+      inactive_border = "0xE8CE47",
     },
     resize_on_border = true,
     allow_tearing = true,
@@ -76,12 +76,10 @@ hl.config({
       range = 10,
       render_power = 5,
       color = "rgba(00000000)",
-      ignore_window = true,
     },
   },
 
   dwindle = {
-    pseudotile = true, -- Master switch for pseudotiling. mainMod + P
     preserve_split = true,
   },
 
